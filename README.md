@@ -1,2 +1,2 @@
-# jsfsdev_front
+# jsfsdev-front
  JavaScript Full Stack Development Epitech
