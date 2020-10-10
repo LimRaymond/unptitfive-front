@@ -1,0 +1,16 @@
+.root {
+  background-color: black;
+  height: '100vh';
+}
+
+.background {
+  height: '1000px';
+  display: 'flex';
+  justify-content: 'center';
+  align-items: 'center';
+  background-image: 'url(/images/picture-background.jpg)';
+  background-size: 'cover';
+  background-repeat: 'no-repeat';
+  background-position: 'center';
+  opacity: 0.85;
+}
