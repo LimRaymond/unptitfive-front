@@ -1,23 +1,24 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import Cookies from "js-cookie";
+
 import "./App.css";
+import Authentification from "./components/auth/Authentification";
 
-import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
-import Home from "./components/landing/Home";
-
-function App() {
+const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          <Route exact path="/">
+            <Redirect to="/authentification" />
+          </Route>
+          <Route path="/authentification" component={Authentification} />
         </Switch>
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
