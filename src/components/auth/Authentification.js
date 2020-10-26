@@ -17,7 +17,7 @@ const Authentification = () => {
   const isConnected = Cookies.get('isConnected');
 
   useEffect(() => {
-    if (isConnected ||auth.errorLogin === false) {
+    if (isConnected || auth.errorLogin === false) {
       history.push('/chat');
     }
   });

@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
-import PropTypes from 'prop-types';
 
 import './App.css';
 import Authentification from './components/auth/Authentification';
@@ -54,11 +53,6 @@ const App = () => {
       </BrowserRouter>
     </div>
   );
-};
-
-App.propTypes = {
-  component: PropTypes.object.isRequired,
-  location: PropTypes.func.isRequired,
 };
 
 export default App;
