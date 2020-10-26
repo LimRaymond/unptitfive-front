@@ -1,18 +1,20 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import {
-  loginAction
-} from "../../store/actions/authActions";
+  loginAction,
+} from '../../store/actions/authActions';
 
 const SignIn = () => {
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     const userData = {
       username: data.username,
-      password: data.password
-    }
-    loginAction(userData);
+      password: data.password,
+    };
+    dispatch(loginAction(userData));
   };
 
   return (

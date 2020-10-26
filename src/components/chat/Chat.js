@@ -1,5 +1,19 @@
-import React from "react";
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getCurrentUserAction } from '../../store/actions/authActions';
 
-export default function Chat() {
-  return <div>Bienvenue sur le chat</div>;
-}
+const Chat = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentUserAction);
+  });
+
+  return (
+    <div>
+      Bienvenue sur le chat
+    </div>
+  );
+};
+
+export default Chat;

@@ -1,11 +1,22 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+
+import { registerAction } from '../../store/actions/authActions';
 
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const userData = {
+      username: data.username,
+      password: data.password,
+      password2: data.password2,
+      email: data.email,
+    };
+    dispatch(registerAction(userData));
+    window.location.reload();
   };
 
   return (

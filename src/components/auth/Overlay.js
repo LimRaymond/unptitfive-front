@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Overlay = (props) => {
   const { handleClickSignInButton, handleClickSignUpButton } = props;
@@ -22,11 +23,11 @@ const Overlay = (props) => {
           </button>
         </div>
         <div className="overlay-panel overlay-right">
-          <h1>Salut l'ami !</h1>
+          <h1>Salut l&apos;ami !</h1>
           <p className="overlay-description">
             Créer toi un compte
             <br />
-            et commence à chatter avec d'autres utilisateurs
+            et commence à chatter avec d&apos;autres utilisateurs
           </p>
           <button
             type="button"
@@ -34,7 +35,7 @@ const Overlay = (props) => {
             id="signUp"
             onClick={handleClickSignUpButton}
           >
-            S'inscrire
+            S&apos;inscrire
           </button>
         </div>
       </div>
@@ -42,4 +43,8 @@ const Overlay = (props) => {
   );
 };
 
+Overlay.propTypes = {
+  handleClickSignInButton: PropTypes.func.isRequired,
+  handleClickSignUpButton: PropTypes.func.isRequired,
+};
 export default Overlay;

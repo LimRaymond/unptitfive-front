@@ -1,12 +1,45 @@
-import React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import Cookies from "js-cookie";
+import React, { useEffect } from 'react';
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import Cookies from 'js-cookie';
+import PropTypes from 'prop-types';
 
-import "./App.css";
-import Authentification from "./components/auth/Authentification";
+import './App.css';
+import Authentification from './components/auth/Authentification';
+import Chat from './components/chat/Chat';
+import { setUserAction } from './store/actions/authActions';
+
+// eslint-disable jsx-props-no-spreading
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest}
+    render={props => Cookies.get('isConnected') ? (
+      <Component {...props} />
+    ) : (
+      <Redirect to={{
+        pathname: rest.redirectedPath,
+        state: { from: props.location },
+      }}
+      />
+    )}
+  />
+);
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const myCookie = Cookies.get('user');
+    if (myCookie) {
+      dispatch(setUserAction(myCookie));
+    }
+  });
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -14,11 +47,18 @@ const App = () => {
           <Route exact path="/">
             <Redirect to="/authentification" />
           </Route>
-          <Route path="/authentification" component={Authentification} />
+          <Route exact path="/authentification" component={Authentification} />
+          <PrivateRoute exact path="/chat" redirectedPath="/authentification" component={Chat} />
+          <Redirect from="*" to="/chat" />
         </Switch>
       </BrowserRouter>
     </div>
   );
+};
+
+App.propTypes = {
+  component: PropTypes.object.isRequired,
+  location: PropTypes.func.isRequired,
 };
 
 export default App;
