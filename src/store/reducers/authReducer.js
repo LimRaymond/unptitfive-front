@@ -18,7 +18,7 @@ const initialState = {
   messageErrorRegister: null,
 };
 
-export default function (state = initialState, action) {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case REGISTER_SUCCESS:
       return {
@@ -45,18 +45,6 @@ export default function (state = initialState, action) {
         messageErrorLogin: action.payload,
         errorLogin: true,
       };
-    case REGISTER_SUCCESS:
-      return {
-        ...state,
-        auth: action.payload,
-        errorRegister: false,
-      };
-    case REGISTER_ERROR:
-      return {
-        ...state,
-        messageErrorRegister: action.payload,
-        errorRegister: true,
-      };
     case GET_CURRENT_USER:
       return {
         ...state,
@@ -78,4 +66,6 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default reducer;

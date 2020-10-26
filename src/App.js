@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect } from 'react';
 import {
   BrowserRouter,
@@ -12,8 +13,6 @@ import './App.css';
 import Authentification from './components/auth/Authentification';
 import Chat from './components/chat/Chat';
 import { setUserAction } from './store/actions/authActions';
-
-// eslint-disable jsx-props-no-spreading
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest}
