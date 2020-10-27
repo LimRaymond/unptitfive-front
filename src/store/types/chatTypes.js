@@ -1,0 +1,2 @@
+export const GET_CHATS_SUCESS = 'GET_CHATS_SUCCESS';
+export const GET_CHATS_ERROR = 'GET_CHATS_ERROR';

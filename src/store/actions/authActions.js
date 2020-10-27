@@ -7,6 +7,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_ERROR,
   GET_CURRENT_USER,
+  GET_CURRENT_USER_ERROR,
   SET_USER,
   UNSET_USER,
 } from '../types/authTypes';
@@ -20,7 +21,7 @@ export const loginAction = (user) => (dispatch) => {
   promise.then(
     (res) => {
       Cookies.set('isConnected', true);
-      Cookies.set('user', res.data.user);
+      Cookies.set('token', res.data.user.token);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data.user,
@@ -29,7 +30,7 @@ export const loginAction = (user) => (dispatch) => {
     (error) => {
       dispatch({
         type: LOGIN_ERROR,
-        payload: error.data,
+        payload: error.reponse.data.message,
       });
     },
   );
@@ -49,17 +50,35 @@ export const registerAction = (user) => (dispatch) => {
     (error) => {
       dispatch({
         type: REGISTER_ERROR,
-        payload: error.data,
+        payload: error.response.data.message,
       });
     },
   );
 };
 
 export const getCurrentUserAction = () => (dispatch) => {
-  dispatch({
-    type: GET_CURRENT_USER,
-    payload: Cookies.get('user'),
-  });
+  let config = {
+    headers: {
+      'Authorization': 'Bearer ' + Cookies.get('token'),
+    },
+  };
+  const promise = axios.get('https://unptitfive-server.herokuapp.com/user/profile', config);
+  promise.then(
+    (res) => {
+      console.log(res.data);
+      dispatch({
+        type: GET_CURRENT_USER,
+        payload: res.data,
+      });
+    },
+    (error) => {
+      console.log(error.response.data.message);
+      dispatch({
+        type: GET_CURRENT_USER_ERROR,
+        payload: error.response.data.message,
+      });
+    },
+  );
 };
 
 export const setUserAction = (dataUser) => (dispatch) => {
@@ -72,5 +91,5 @@ export const setUserAction = (dataUser) => (dispatch) => {
 export const unsetUserAction = () => (dispatch) => {
   Cookies.remove('user');
   Cookies.remove('isConnected');
-  dispatch({ type: UNSET_USER });
+  dispatch({ type: UNSET_USER }); 
 };

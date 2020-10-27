@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { registerAction } from '../../store/actions/authActions';
 
 const SignUp = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
@@ -38,11 +38,15 @@ const SignUp = () => {
           autoComplete="off"
           ref={register}
         />
+        { errors.password && <p>{errors.password.message}</p> }
         <input
           type="password"
           name="password"
           placeholder="Mot de passe"
-          ref={register}
+          ref={register({
+            required: 'Un mot de passe est nécessaire',
+            minLength: { value: 6, message: 'Le mot de passe doit contenir 6 caractères minimum'},
+          })}
         />
         <input
           type="password"

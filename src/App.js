@@ -31,12 +31,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 const App = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const myCookie = Cookies.get('user');
-    if (myCookie) {
+   useEffect(() => {
+     const myCookie = Cookies.get('user');
+     if (myCookie) {
       dispatch(setUserAction(myCookie));
-    }
-  });
+   }
+   });
 
   return (
     <div className="App">

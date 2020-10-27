@@ -12,6 +12,7 @@ import {
 const initialState = {
   isLoggedIn: false,
   auth: {},
+  currentUser: {},
   errorLogin: null,
   messageErrorLogin: null,
   errorRegister: null,
@@ -48,7 +49,7 @@ const reducer = (state = initialState, action) => {
     case GET_CURRENT_USER:
       return {
         ...state,
-        auth: action.payload,
+        currentUser: action.payload,
       };
     case GET_CURRENT_USER_ERROR:
       return {
