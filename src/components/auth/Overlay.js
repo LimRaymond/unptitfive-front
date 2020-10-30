@@ -11,7 +11,7 @@ const Overlay = (props) => {
         <div className="overlay-panel overlay-left">
           <h1>{translate('WELCOME_AGAIN', navigator.languages)}</h1>
           <p className="overlay-description">
-          {translate('WELCOME_AGAIN_1', navigator.languages)}
+            {translate('WELCOME_AGAIN_1', navigator.languages)}
             <br />
             {translate('WELCOME_AGAIN_2', navigator.languages)}
           </p>
@@ -27,7 +27,7 @@ const Overlay = (props) => {
         <div className="overlay-panel overlay-right">
           <h1>{translate('HELLO_FRIEND', navigator.languages)}</h1>
           <p className="overlay-description">
-          {translate('HELLO_FRIEND_1', navigator.languages)}
+            {translate('HELLO_FRIEND_1', navigator.languages)}
             <br />
             {translate('HELLO_FRIEND_2', navigator.languages)}
           </p>
@@ -49,4 +49,5 @@ Overlay.propTypes = {
   handleClickSignInButton: PropTypes.func.isRequired,
   handleClickSignUpButton: PropTypes.func.isRequired,
 };
+
 export default Overlay;

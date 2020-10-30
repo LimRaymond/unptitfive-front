@@ -1,12 +1,11 @@
 import translations from './translations.json';
 
 const translate = (msgCode, lang, ...args) => {
-  let langSub = [];
-  lang.forEach((l) => {
-    langSub.push(l.substring(0,2));
-  });
+  const langSub = [];
 
-  lang = langSub;
+  lang.forEach((l) => {
+    langSub.push(l.substring(0, 2));
+  });
 
   if (!translations[msgCode]) return '';
 
@@ -14,7 +13,7 @@ const translate = (msgCode, lang, ...args) => {
   const knownLang = Object.keys(translations[msgCode]);
   let translation = translations[msgCode][knownLang[0]];
 
-  const inter = lang.filter((e) => knownLang.includes(e));
+  const inter = langSub.filter((e) => knownLang.includes(e));
   if (inter.length) {
     translation = translations[msgCode][inter[0]];
   }

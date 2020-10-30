@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import PropTypes from 'prop-types';
 
 import { registerAction } from '../../store/actions/authActions';
 import translate from '../../translations/translate';
@@ -15,6 +16,7 @@ const SignUp = (props) => {
     if (!auth.errorRegister) {
       handleClickSignInButton();
     }
+    // eslint-disable-next-line
   }, [auth.errorRegister]);
 
   const onSubmit = async (data) => {
@@ -52,7 +54,7 @@ const SignUp = (props) => {
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
               message: translate('EMAIL_INVALID', navigator.languages),
-            }
+            },
           })}
         />
         { errors.password && <p className="error-message">{errors.password.message}</p> }
@@ -62,7 +64,7 @@ const SignUp = (props) => {
           placeholder={translate('PASSWORD', navigator.languages)}
           ref={register({
             required: translate('PASSWORD_FIELD', navigator.languages),
-            minLength: { value: 6, message: translate('PASSWORD_MIN', navigator.languages)},
+            minLength: { value: 6, message: translate('PASSWORD_MIN', navigator.languages) },
           })}
         />
         <input
@@ -76,6 +78,10 @@ const SignUp = (props) => {
       </form>
     </div>
   );
+};
+
+SignUp.propTypes = {
+  handleClickSignInButton: PropTypes.func.isRequired,
 };
 
 export default SignUp;

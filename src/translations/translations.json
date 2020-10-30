@@ -70,5 +70,13 @@
   "PASSWORD_MATCH": {
     "en": "Type your password again",
     "fr": "Retapez votre mot de passe"
+  },
+  "CHANNEL": {
+    "en": "Channels",
+    "fr": "Canaux"
+  },
+  "ENTER_MESSAGE": {
+    "en": "Your message...",
+    "fr": "Votre message..."
   }
 }

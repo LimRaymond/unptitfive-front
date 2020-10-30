@@ -6,10 +6,10 @@ import {
   GET_CHATS_ERROR,
 } from '../types/chatTypes';
 
-export const getAllChannelsAction = () => (dispatch) => {
-  let config = {
+const getAllChannelsAction = () => (dispatch) => {
+  const config = {
     headers: {
-      'Authorization': 'Bearer ' + Cookies.get('token'),
+      Authorization: `Bearer ${Cookies.get('token')}`,
     },
   };
   const promise = axios.get('https://unptitfive-server.herokuapp.com/channel', config);
@@ -22,9 +22,11 @@ export const getAllChannelsAction = () => (dispatch) => {
     },
     (error) => {
       dispatch({
-        type: GET_CHATS_SUCESS,
+        type: GET_CHATS_ERROR,
         payload: error.response.data.message,
       });
     },
   );
 };
+
+export default getAllChannelsAction;

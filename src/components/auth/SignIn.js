@@ -7,7 +7,7 @@ import {
 } from '../../store/actions/authActions';
 import translate from '../../translations/translate';
 
-const SignIn = (props) => {
+const SignIn = () => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);

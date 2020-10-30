@@ -57,9 +57,9 @@ export const registerAction = (user) => (dispatch) => {
 };
 
 export const getCurrentUserAction = () => (dispatch) => {
-  let config = {
+  const config = {
     headers: {
-      'Authorization': 'Bearer ' + Cookies.get('token'),
+      Authorization: `Bearer ${Cookies.get('token')}`,
     },
   };
   const promise = axios.get('https://unptitfive-server.herokuapp.com/user/profile', config);
@@ -87,7 +87,7 @@ export const setUserAction = (dataUser) => (dispatch) => {
 };
 
 export const unsetUserAction = () => (dispatch) => {
-  Cookies.remove('user');
+  Cookies.remove('token');
   Cookies.remove('isConnected');
-  dispatch({ type: UNSET_USER }); 
+  dispatch({ type: UNSET_USER });
 };
