@@ -76,6 +76,16 @@ input {
   border-radius: 15px;
 }
 
+.error-message {
+  font-size: 10px;
+  color: #FF0000 ;
+}
+
+.success-message {
+  font-size: 12px;
+  color: #00ff4c ;
+}
+
 .social-container {
   margin: 20px 0;
 }

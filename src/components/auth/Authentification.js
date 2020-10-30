@@ -10,7 +10,6 @@ import SignIn from './SignIn';
 import Overlay from './Overlay';
 
 const Authentification = () => {
-  const { register, handleSubmit } = useForm();
   const history = useHistory();
   const auth = useSelector((state) => state.auth);
   const [rightPanelActive, setRightPanelActive] = useState(false);
@@ -30,14 +29,16 @@ const Authentification = () => {
     setRightPanelActive(false);
   }
 
+  console.log(rightPanelActive);
+
   return (
     <div className="App">
       <div
         className={`container ${rightPanelActive ? `right-panel-active` : ``}`}
         id="container"
       >
-        <SignUp register={register} handleSubmit={handleSubmit} />
-        <SignIn register={register} handleSubmit={handleSubmit} />
+        <SignUp handleClickSignInButton={handleClickSignInButton} />
+        <SignIn />
         <Overlay
           handleClickSignInButton={handleClickSignInButton}
           handleClickSignUpButton={handleClickSignUpButton}
