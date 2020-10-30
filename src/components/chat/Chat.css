@@ -1,0 +1,84 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #f0f0f0;
+    position: relative;
+    min-height: 100%;;
+}
+
+.App {
+    text-align: left;
+}
+
+.channel-left {
+    position: fixed;
+    width: 300px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+}
+
+.channel-left .title {
+    font-weight: bold;
+    border-bottom: 1px solid #e4e4e4;
+    padding: 20px;
+}
+
+.channel-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.channel-list li {
+    cursor: pointer;
+    padding: 20px;
+}
+
+.channel-list li:hover, .current-channel {
+    background-color: #ebebeb;
+}
+
+.chat-area {
+    width: 600px;
+    padding-left: 300px;
+}
+
+.chat-area form {
+    position: absolute;
+    bottom: 0;
+    left: 300px;
+    width: 600px;
+}
+
+.chat-area form input {
+    text-align: left;
+    background-color: white;
+    border-radius: 0;
+    border: none;
+    border-bottom: 3px solid blue;
+    padding: 15px;
+    margin: 25px 50px;
+    font-size: 16px;
+    outline: 0;
+}
+
+.message-container {
+    padding-bottom: 100px;
+    padding-left: 50px;
+    padding-top: 25px;;
+}
+
+.message-container .info, .message-container .message {
+    margin-bottom: 15px;
+}
+
+.message-container .message div {
+    background-color: white;
+    padding: 10px;
+    display: inline-block;
+    line-height: 26px;
+}

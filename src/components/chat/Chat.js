@@ -1,45 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import io from 'socket.io-client';
-
-import { getCurrentUserAction } from '../../store/actions/authActions';
-import { getAllChannelsAction } from '../../store/actions/chatActions';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+import './Chat.css';
 
 const Chat = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const [chatsState, setChats] = useState([]);
-  const [message, setMessage] = useState({ message: '', name: ''});
-
-  const socket = io('https://unptitfive-server.herokuapp.com/', {
-    query: {
-      token: Cookies.get('token'),
-      lang: navigator.languages
-    }
-  });
-
-  socket.on('info', (data) => {
-    renderMessage(data.message);
-    console.log(data.message);
-  });
-  
-  socket.on('message', (data) => {
-    console.log(data.username, data.message);
-   });
+  const [channels, setChannels] = useState([]);
+  const [currentChannel, setCurrentChannel] = useState('');
+  const [messages, setMessages] = useState('');
+  const [input, setInput] = useState('');
+  const [socket, setSocket] = useState({});
 
   useEffect(() => {
     let config = {
@@ -50,39 +20,109 @@ const Chat = () => {
     const promise = axios.get('https://unptitfive-server.herokuapp.com/channel', config);
     promise.then(
       (res) => {
-        setChats(res.data);
+        setChannels(res.data);
+        if (res.data) {
+          chooseChannel(s, res.data[0].name);
+        }
       }
     );
+
+    const s = io('https://unptitfive-server.herokuapp.com/', {
+      query: {
+        token: Cookies.get('token'),
+        lang: navigator.languages
+      }
+    });
+
+    setSocket(s);
+
+    s.on('info', (data) => {
+      const divStyle = {
+          color: data.color,
+          fontStyle: 'italic',
+      };
+      const msg = <div className='info' style={divStyle}><b>{data.message}</b></div>;
+      let scrollAtBottom = false;
+      if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+        scrollAtBottom = true;
+      }
+      setMessages(messages => [...messages, msg]);
+      if (scrollAtBottom) {
+        window.scrollTo(0, document.body.scrollHeight);
+      }
+    });
+  
+    s.on('message', (data) => {
+      console.log('message received');
+      const msg = <div className='message'><div><b>{data.username}</b> : {data.message}</div></div>;
+      let scrollAtBottom = false;
+      if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+        scrollAtBottom = true;
+      }
+      setMessages(messages => [...messages, msg]);
+      if (scrollAtBottom) {
+        window.scrollTo(0, document.body.scrollHeight);
+      }
+    });
+
   }, []);
 
-  console.log(chatsState);
-  const chooseChannel = (name) => {
-    socket.emit('join', name);
-  }
-
-  const renderMessage = (message) => {
-    console.log(message);
-    return (
-      <h1 name="message">
-        {message}
-      </h1>
-    );
+  const onSubmit = e => {
+    console.log('socket.emit', input);
+    socket.emit('message', input);
+    setInput('');
+    e.preventDefault();
   };
 
+  const onChange = e => {
+    setInput(e.target.value);
+  };
+
+  const chooseChannel = (s, name) => {
+    setMessages('');
+
+    let config = {
+      headers: {
+        'Authorization': 'Bearer ' + Cookies.get('token'),
+      },
+    };
+    const promise = axios.get('https://unptitfive-server.herokuapp.com/message/' + name, config);
+    promise.then(
+      (res) => {
+        if (res.data) {
+          const str = res.data.map((e) => {
+            return (<div className='message'><div><b>{e.user.username}</b> : {e.message}</div></div>);
+          });
+          setMessages(messages => [...messages, str]);
+          window.scrollTo(0, document.body.scrollHeight);
+        }
+        setCurrentChannel(name);
+        s.emit('join', name);
+      }
+    );
+  }
+
   return (
-    <div className={classes.root}>
-      <List component="nav" aria-label="main mailbox folders">
-        {chatsState.map((elem, index) => (
-          <ListItem key={index} button onClick={() => chooseChannel(elem.name)}>
-            {elem.name}
-          </ListItem>
-        ))}
-      </List>
-      <div>
-        {renderMessage()}
+    <div className='chat'>
+      <div className='channel-left'>
+        <div className='title'>Channels</div>
+        <ul className='channel-list'>
+          {channels.map((elem, index) => (
+            <li className={(elem.name === currentChannel) ? 'current-channel' : ''} onClick={() => (elem.name !== currentChannel) ? chooseChannel(socket, elem.name) : null}>
+              {elem.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className='chat-area'>
+        <div className='message-container'>
+          {messages}
+        </div>
+        <form onSubmit={onSubmit}>
+          <input type='text' value={input} onChange={onChange} autofocus='true' placeholder='Votre message...' />
+        </form>
       </div>
     </div>
-
   );
 };
 
