@@ -30,7 +30,7 @@ export const loginAction = (user) => (dispatch) => {
     (error) => {
       dispatch({
         type: LOGIN_ERROR,
-        payload: error.reponse.data.message,
+        payload: error.response.data.message,
       });
     },
   );
