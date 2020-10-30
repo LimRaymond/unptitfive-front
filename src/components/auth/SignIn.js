@@ -19,6 +19,7 @@ const SignIn = (props) => {
     dispatch(loginAction(userData));
   };
 
+  console.log(auth.errorLogin);
   return (
     <div className="form-container sign-in-container">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -45,6 +46,7 @@ const SignIn = (props) => {
           })}
         />
         { !auth.errorRegister ? (<p className="success-message">{auth.auth.message}</p>) : null}
+        { auth.errorLogin ? (<p className="error-message">{auth.messageErrorLogin}</p>) : null}
         <input type="submit" value="Se connecter" className="form-button" />
       </form>
     </div>
