@@ -6,13 +6,11 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 
 import './App.css';
 import Authentification from './components/auth/Authentification';
 import Chat from './components/chat/Chat';
-import { setUserAction } from './store/actions/authActions';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest}
@@ -29,15 +27,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 const App = () => {
-  const dispatch = useDispatch();
-
-   useEffect(() => {
-     const myCookie = Cookies.get('user');
-     if (myCookie) {
-      dispatch(setUserAction(myCookie));
-   }
-   });
-
   return (
     <div className="App">
       <BrowserRouter>

@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import {
   loginAction,
 } from '../../store/actions/authActions';
+import translate from '../../translations/translate';
 
 const SignIn = (props) => {
   const { register, handleSubmit, errors } = useForm();
@@ -19,35 +20,32 @@ const SignIn = (props) => {
     dispatch(loginAction(userData));
   };
 
-  console.log(auth.errorLogin);
   return (
     <div className="form-container sign-in-container">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <h1 className="form-title">Connexion</h1>
+        <h1 className="form-title">{translate('SIGN_IN', navigator.languages)}</h1>
         { errors.username && <p className="error-message">{errors.username.message}</p> }
         <input
           type="text"
           name="username"
-          placeholder="Nom de compte"
+          placeholder={translate('USERNAME', navigator.languages)}
           autoComplete="off"
           ref={register({
-            required: 'Le champ nom de compte est vide',
-            minLength: { value: 1, message: 'Le champ nom de compte ne doit pas être vide'},
+            required: translate('USERNAME_FIELD', navigator.languages),
           })}
         />
         { errors.password && <p className="error-message">{errors.password.message}</p> }
         <input
           type="password"
           name="password"
-          placeholder="Mot de passe"
+          placeholder={translate('PASSWORD', navigator.languages)}
           ref={register({
-            required: 'Le champ mot de passe est vide',
-            minLength: { value: 1, message: 'Le champ nom de compte ne doit pas être vide'},
+            required: translate('PASSWORD_FIELD', navigator.languages),
           })}
         />
         { !auth.errorRegister ? (<p className="success-message">{auth.auth.message}</p>) : null}
         { auth.errorLogin ? (<p className="error-message">{auth.messageErrorLogin}</p>) : null}
-        <input type="submit" value="Se connecter" className="form-button" />
+        <input type="submit" value={translate('SIGN_IN', navigator.languages)} className="form-button" />
       </form>
     </div>
   );

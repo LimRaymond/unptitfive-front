@@ -29,8 +29,6 @@ const Authentification = () => {
     setRightPanelActive(false);
   }
 
-  console.log(rightPanelActive);
-
   return (
     <div className="App">
       <div

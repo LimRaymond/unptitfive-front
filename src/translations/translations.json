@@ -1,0 +1,74 @@
+{
+  "WELCOME_AGAIN": {
+    "en": "Welcome Back",
+    "fr": "Bienvenue à nouveau"
+  },
+  "WELCOME_AGAIN_1": {
+    "en": "To stay connected with us,",
+    "fr": "Pour rester connecter avec nous,"
+  },
+  "WELCOME_AGAIN_2": {
+    "en": "please log in with your username and password",
+    "fr": "veuillez vous connecter avec vos identifiants"
+  },
+  "SIGN_IN": {
+    "en": "Sign in",
+    "fr": "Se connecter"
+  },
+  "HELLO_FRIEND": {
+    "en": "Hello, Friend !",
+    "fr": "Salut, l'ami !"
+  },
+  "HELLO_FRIEND_1": {
+    "en": "Create an account",
+    "fr": "Créer toi un compte"
+  },
+  "HELLO_FRIEND_2": {
+    "en": "and start chatting with other users",
+    "fr": "et commence à chatter avec d'autres utilisateurs"
+  },
+  "SIGN_UP": {
+    "en": "Sign up",
+    "fr": "S'inscrire"
+  },
+  "USERNAME": {
+    "en": "Username",
+    "fr": "Nom de compte"
+  },
+  "PASSWORD": {
+    "en": "Password",
+    "fr": "Mot de passe"
+  },
+  "CREATE_ACCOUNT": {
+    "en": "Create Account",
+    "fr": "Créer un compte"
+  },
+  "EMAIL": {
+    "en": "Email address",
+    "fr": "Adresse email"
+  },
+  "USERNAME_FIELD": {
+    "en": "Username is required",
+    "fr": "Un nom de compte est nécessaire"
+  },
+  "EMAIL_FIELD": {
+    "en": "Email address is required",
+    "fr": "Une adresse email est nécessaire"
+  },
+  "EMAIL_INVALID": {
+    "en": "Invalid email address",
+    "fr": "L'adresse email est invalide"
+  },
+  "PASSWORD_FIELD": {
+    "en": "Password is required",
+    "fr": "Un mot de passe est nécessaire"
+  },
+  "PASSWORD_MIN": {
+    "en": "Password should contain 6 characters at least",
+    "fr": "Le mot de passe doit contenir 6 caractères minimum"
+  },
+  "PASSWORD_MATCH": {
+    "en": "Type your password again",
+    "fr": "Retapez votre mot de passe"
+  }
+}

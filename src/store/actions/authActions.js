@@ -65,14 +65,12 @@ export const getCurrentUserAction = () => (dispatch) => {
   const promise = axios.get('https://unptitfive-server.herokuapp.com/user/profile', config);
   promise.then(
     (res) => {
-      console.log(res.data);
       dispatch({
         type: GET_CURRENT_USER,
         payload: res.data,
       });
     },
     (error) => {
-      console.log(error.response.data.message);
       dispatch({
         type: GET_CURRENT_USER_ERROR,
         payload: error.response.data.message,

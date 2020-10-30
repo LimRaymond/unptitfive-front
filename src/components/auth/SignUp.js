@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
 import { registerAction } from '../../store/actions/authActions';
+import translate from '../../translations/translate';
 
 const SignUp = (props) => {
   const { handleClickSignInButton } = props;
@@ -29,29 +30,28 @@ const SignUp = (props) => {
   return (
     <div className="form-container sign-up-container">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <h1 className="form-title">Créer un compte</h1>
+        <h1 className="form-title">{translate('CREATE_ACCOUNT', navigator.languages)}</h1>
         { errors.username && <p className="error-message">{errors.username.message}</p> }
         <input
           type="text"
           name="username"
-          placeholder="Nom de compte"
+          placeholder={translate('USERNAME', navigator.languages)}
           autoComplete="off"
           ref={register({
-            required: 'Un nom de compte est nécessaire',
-            minLength: { value: 1, message: 'Le nom de compte doit contenir 1 caractères minimum'},
+            required: translate('USERNAME_FIELD', navigator.languages),
           })}
         />
         { errors.email && <p className="error-message">{errors.email.message}</p> }
         <input
           type="text"
           name="email"
-          placeholder="Adresse Email"
+          placeholder={translate('EMAIL', navigator.languages)}
           autoComplete="off"
           ref={register({
-            required: 'Une adresse email est nécessaire',
+            required: translate('EMAIL_FIELD', navigator.languages),
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "L'adresse email est invalide",
+              message: translate('EMAIL_INVALID', navigator.languages),
             }
           })}
         />
@@ -59,20 +59,20 @@ const SignUp = (props) => {
         <input
           type="password"
           name="password"
-          placeholder="Mot de passe"
+          placeholder={translate('PASSWORD', navigator.languages)}
           ref={register({
-            required: 'Un mot de passe est nécessaire',
-            minLength: { value: 6, message: 'Le mot de passe doit contenir 6 caractères minimum'},
+            required: translate('PASSWORD_FIELD', navigator.languages),
+            minLength: { value: 6, message: translate('PASSWORD_MIN', navigator.languages)},
           })}
         />
         <input
           type="password"
           name="password2"
-          placeholder="Retapez votre mot de passe"
+          placeholder={translate('PASSWORD_MATCH', navigator.languages)}
           ref={register}
         />
         { auth.errorRegister ? (<p className="error-message">{auth.messageErrorRegister}</p>) : null}
-        <input type="submit" value="S'inscrire" className="form-button" />
+        <input type="submit" value={translate('SIGN_UP', navigator.languages)} className="form-button" />
       </form>
     </div>
   );

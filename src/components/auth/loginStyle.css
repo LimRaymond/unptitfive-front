@@ -70,7 +70,7 @@ input {
   border: none;
   padding: 12px 15px;
   margin: 8px 0;
-  width: 85%;
+  width: 100%;
   text-align: center;
   font-size: 13px;
   border-radius: 15px;
@@ -111,7 +111,7 @@ input {
   overflow: hidden;
   width: 768px;
   max-width: 100%;
-  min-height: 480px;
+  min-height: 500px;
 }
 
 .form-container {
