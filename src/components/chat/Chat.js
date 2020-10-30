@@ -12,9 +12,9 @@ const Chat = () => {
   const [socket, setSocket] = useState({});
 
   useEffect(() => {
-    let config = {
+    const config = {
       headers: {
-        'Authorization': 'Bearer ' + Cookies.get('token'),
+        Authorization: `Bearer ${Cookies.get('token')}`,
       },
     };
     const promise = axios.get('https://unptitfive-server.herokuapp.com/channel', config);
@@ -24,57 +24,54 @@ const Chat = () => {
         if (res.data) {
           chooseChannel(s, res.data[0].name);
         }
-      }
+      },
     );
 
     const s = io('https://unptitfive-server.herokuapp.com/', {
       query: {
         token: Cookies.get('token'),
-        lang: navigator.languages
-      }
+        lang: navigator.languages,
+      },
     });
 
     setSocket(s);
 
     s.on('info', (data) => {
       const divStyle = {
-          color: data.color,
-          fontStyle: 'italic',
+        color: data.color,
+        fontStyle: 'italic',
       };
       const msg = <div className='info' style={divStyle}><b>{data.message}</b></div>;
       let scrollAtBottom = false;
       if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
         scrollAtBottom = true;
       }
-      setMessages(messages => [...messages, msg]);
+      setMessages((messages) => [...messages, msg]);
       if (scrollAtBottom) {
         window.scrollTo(0, document.body.scrollHeight);
       }
     });
-  
+
     s.on('message', (data) => {
-      console.log('message received');
       const msg = <div className='message'><div><b>{data.username}</b> : {data.message}</div></div>;
       let scrollAtBottom = false;
       if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
         scrollAtBottom = true;
       }
-      setMessages(messages => [...messages, msg]);
+      setMessages((messages) => [...messages, msg]);
       if (scrollAtBottom) {
         window.scrollTo(0, document.body.scrollHeight);
       }
     });
-
   }, []);
 
-  const onSubmit = e => {
-    console.log('socket.emit', input);
+  const onSubmit = (e) => {
     socket.emit('message', input);
     setInput('');
     e.preventDefault();
   };
 
-  const onChange = e => {
+  const onChange = (e) => {
     setInput(e.target.value);
   };
 
@@ -83,24 +80,24 @@ const Chat = () => {
 
     let config = {
       headers: {
-        'Authorization': 'Bearer ' + Cookies.get('token'),
+        Authorization: `Bearer ${Cookies.get('token')}`,
       },
     };
-    const promise = axios.get('https://unptitfive-server.herokuapp.com/message/' + name, config);
+    const promise = axios.get(`https://unptitfive-server.herokuapp.com/message/${name}`, config);
     promise.then(
       (res) => {
         if (res.data) {
           const str = res.data.map((e) => {
             return (<div className='message'><div><b>{e.user.username}</b> : {e.message}</div></div>);
           });
-          setMessages(messages => [...messages, str]);
+          setMessages((messages) => [...messages, str]);
           window.scrollTo(0, document.body.scrollHeight);
         }
         setCurrentChannel(name);
         s.emit('join', name);
-      }
+      },
     );
-  }
+  };
 
   return (
     <div className='chat'>
@@ -108,7 +105,8 @@ const Chat = () => {
         <div className='title'>Channels</div>
         <ul className='channel-list'>
           {channels.map((elem, index) => (
-            <li className={(elem.name === currentChannel) ? 'current-channel' : ''} onClick={() => (elem.name !== currentChannel) ? chooseChannel(socket, elem.name) : null}>
+            <li className={(elem.name === currentChannel) ? 'current-channel' : ''}
+            onClick={() => (elem.name !== currentChannel) ? chooseChannel(socket, elem.name) : null}>
               {elem.name}
             </li>
           ))}
@@ -119,7 +117,8 @@ const Chat = () => {
           {messages}
         </div>
         <form onSubmit={onSubmit}>
-          <input type='text' value={input} onChange={onChange} autofocus='true' placeholder='Votre message...' />
+          <input type='text' value={input} onChange={onChange} autofocus='true'
+          placeholder='Votre message...' />
         </form>
       </div>
     </div>
