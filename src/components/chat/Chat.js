@@ -1,3 +1,10 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/no-unknown-property */
+
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -21,7 +28,6 @@ const Chat = () => {
   const chooseChannel = (s, name) => {
     setMessages('');
 
-    /* eslint-disable */
     const config = {
       headers: {
         Authorization: `Bearer ${Cookies.get('token')}`,
@@ -105,6 +111,7 @@ const Chat = () => {
         window.scrollTo(0, document.body.scrollHeight);
       }
     });
+    // eslint-disable-next-line
   }, []);
 
   const onSubmit = (e) => {
@@ -129,24 +136,30 @@ const Chat = () => {
       <div className="channel-left">
         <div className="title">{translate('CHANNEL', navigator.languages)}</div>
         <ul className="channel-list">
-          {channels.map((elem, index) => (
-          <li key={index} className={(elem.name === currentChannel) ? 'current-channel' : ''}
-            onClick={() => (elem.name !== currentChannel) ? chooseChannel(socket, elem.name)
-              : null}
-          >
-            {elem.name}
-          </li>
+          {channels.map((elem, index) => ( // eslint-disable-line
+            <li
+              className={(elem.name === currentChannel) ? 'current-channel' : ''}
+              onClick={() => (elem.name !== currentChannel) ? chooseChannel(socket, elem.name)
+                : null}
+            >
+              {elem.name}
+            </li>
           ))}
         </ul>
-        <div className='logout' onClick={() => disconnectUser()}>{translate('LOGOUT', navigator.languages)}</div>
+        <div className="logout" onClick={() => disconnectUser()}>{translate('LOGOUT', navigator.languages)}</div>
       </div>
-      <div className='chat-area'>
-        <div className='message-container'>
+      <div className="chat-area">
+        <div className="message-container">
           {messages}
         </div>
         <form onSubmit={onSubmit}>
-          <input type='text' value={input} onChange={onChange} autofocus='true'
-          placeholder={translate('ENTER_MESSAGE', navigator.languages)} />
+          <input
+            type="text"
+            value={input}
+            onChange={onChange}
+            autofocus="true"
+            placeholder={translate('ENTER_MESSAGE', navigator.languages)}
+          />
         </form>
       </div>
     </div>
