@@ -5,6 +5,7 @@ import translate from '../../translations/translate';
 
 const Overlay = (props) => {
   const { handleClickSignInButton, handleClickSignUpButton } = props;
+
   return (
     <div className="overlay-container">
       <div className="overlay">

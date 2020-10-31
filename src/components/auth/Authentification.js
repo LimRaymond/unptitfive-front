@@ -31,7 +31,7 @@ const Authentification = () => {
   return (
     <div className="App">
       <div
-        className={`container ${rightPanelActive ? `right-panel-active` : ``}`}
+        className={rightPanelActive ? 'container right-panel-active' : 'container'}
         id="container"
       >
         <SignUp handleClickSignInButton={handleClickSignInButton} />

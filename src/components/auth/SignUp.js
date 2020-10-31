@@ -16,7 +16,6 @@ const SignUp = (props) => {
     if (!auth.errorRegister) {
       handleClickSignInButton();
     }
-    // eslint-disable-next-line
   }, [auth.errorRegister]);
 
   const onSubmit = async (data) => {
