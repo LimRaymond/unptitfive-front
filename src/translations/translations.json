@@ -78,5 +78,9 @@
   "ENTER_MESSAGE": {
     "en": "Your message...",
     "fr": "Votre message..."
+  },
+  "LOGOUT": {
+    "en": "Log out",
+    "fr": "Se déconnecter"
   }
 }

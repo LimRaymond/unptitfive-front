@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import './Chat.css';
+import translate from '../../translations/translate';
 
 const Chat = () => {
   const [channels, setChannels] = useState([]);
@@ -102,7 +103,7 @@ const Chat = () => {
   return (
     <div className='chat'>
       <div className='channel-left'>
-        <div className='title'>Channels</div>
+        <div className='title'>{translate('CHANNEL', navigator.languages)}</div>
         <ul className='channel-list'>
           {channels.map((elem, index) => (
             <li className={(elem.name === currentChannel) ? 'current-channel' : ''}
@@ -111,6 +112,7 @@ const Chat = () => {
             </li>
           ))}
         </ul>
+        <div className='logout'>{translate('LOGOUT', navigator.languages)}</div>
       </div>
       <div className='chat-area'>
         <div className='message-container'>
@@ -118,7 +120,7 @@ const Chat = () => {
         </div>
         <form onSubmit={onSubmit}>
           <input type='text' value={input} onChange={onChange} autofocus='true'
-          placeholder='Votre message...' />
+          placeholder={translate('ENTER_MESSAGE', navigator.languages)} />
         </form>
       </div>
     </div>

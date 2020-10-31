@@ -19,18 +19,42 @@ body {
     left: 0;
     bottom: 0;
     background-color: white;
+    overflow-y: auto;
+}
+
+@media all and (max-width: 920px)
+{
+    .channel-left
+    {
+        display: none;
+    }
 }
 
 .channel-left .title {
     font-weight: bold;
     border-bottom: 1px solid #e4e4e4;
     padding: 20px;
+    color: #ff4b2b;
+}
+
+.channel-left .logout {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #ff4b2b;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.channel-left .logout:hover {
+    background-color: #e93616;
 }
 
 .channel-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    border-bottom: 1px solid #e4e4e4;
 }
 
 .channel-list li {
@@ -47,11 +71,32 @@ body {
     padding-left: 300px;
 }
 
+@media all and (max-width: 920px)
+{
+    .chat-area
+    {
+        width: 100%;
+        padding: 0;
+    }
+}
+
 .chat-area form {
     position: absolute;
     bottom: 0;
     left: 300px;
     width: 600px;
+    padding: 25px 50px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@media all and (max-width: 920px)
+{
+    .chat-area form
+    {
+        width: 100%;
+        left: 0;
+    }
 }
 
 .chat-area form input {
@@ -61,15 +106,17 @@ body {
     border: none;
     border-bottom: 3px solid #ff4b2b;
     padding: 15px;
-    margin: 25px 50px;
+    margin: 0;
     font-size: 16px;
     outline: 0;
+    box-sizing: border-box;
 }
 
 .message-container {
     padding-bottom: 100px;
     padding-left: 50px;
-    padding-top: 25px;;
+    padding-top: 25px;
+    padding-right: 50px;
 }
 
 .message-container .info, .message-container .message {
