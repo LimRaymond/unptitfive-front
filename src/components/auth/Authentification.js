@@ -7,12 +7,14 @@ import './loginStyle.css';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
 import Overlay from './Overlay';
+import useDarkMode from '../../hooks/useDarkMode';
 
 const Authentification = () => {
   const history = useHistory();
   const auth = useSelector((state) => state.auth);
   const [rightPanelActive, setRightPanelActive] = useState(false);
   const isConnected = Cookies.get('isConnected');
+  useDarkMode();
 
   useEffect(() => {
     if (isConnected || auth.errorLogin === false) {

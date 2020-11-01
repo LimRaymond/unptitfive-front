@@ -1,0 +1,29 @@
+body.dark-mode {
+  background: #2a2f38;
+  color: #fff;
+}
+
+body.dark-mode .channel-left {
+  background: #1d2127;
+}
+
+body.dark-mode .message-container .message div {
+  background: #242830;
+}
+
+body.dark-mode .input-message {
+  background: #242930;
+  color: #fff;
+}
+
+body.dark-mode .channel-list li:hover {
+  background: #39414d;
+}
+
+body.dark-mode .current-channel {
+  background: #39414d;
+}
+
+body.dark-mode .form {
+  background: #1d2127;
+}

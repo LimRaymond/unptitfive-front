@@ -11,6 +11,7 @@ import {
 import Cookies from 'js-cookie';
 
 import './App.css';
+import './dark.css';
 import Authentification from './components/auth/Authentification';
 import Chat from './components/chat/Chat';
 

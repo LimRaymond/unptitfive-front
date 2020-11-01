@@ -15,6 +15,7 @@ import axios from 'axios';
 import './Chat.css';
 import translate from '../../translations/translate';
 import { unsetUserAction } from '../../store/actions/authActions';
+import useDarkMode from '../../hooks/useDarkMode';
 
 const Chat = () => {
   const [channels, setChannels] = useState([]);
@@ -24,6 +25,7 @@ const Chat = () => {
   const [socket, setSocket] = useState({});
   const dispatch = useDispatch();
   const history = useHistory();
+  const ThemeSwitcher = useDarkMode();
 
   const chooseChannel = (s, name) => {
     setMessages('');
@@ -146,6 +148,7 @@ const Chat = () => {
             </li>
           ))}
         </ul>
+        <div className="theme-switcher">{ThemeSwitcher}</div>
         <div className="logout" onClick={() => disconnectUser()}>{translate('LOGOUT', navigator.languages)}</div>
       </div>
       <div className="chat-area">
@@ -154,6 +157,7 @@ const Chat = () => {
         </div>
         <form onSubmit={onSubmit}>
           <input
+            className="input-message"
             type="text"
             value={input}
             onChange={onChange}
